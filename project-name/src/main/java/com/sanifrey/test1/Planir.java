@@ -125,6 +125,7 @@ public class Planir {
 		/**
 		 * Создаём простой компонент button_1 класса JButton
 		 */
+		textField_4.setText(String.valueOf(Formula.getAmount()));
 		JButton button_1 = new JButton("Расчёт свободной площади");
 		/**
 		 * Добавляем слушателя к кнопке button_1 с помощью вызова addActionListener

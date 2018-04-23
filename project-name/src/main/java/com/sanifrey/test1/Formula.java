@@ -27,7 +27,7 @@ public class Formula {
 	 * Вызываем конструктор
 	 */
 	public Formula(Planir someframe) {
-		this.plframe = someframe;
+		this.setPlframe(someframe);
 	}
 
 	/**
@@ -129,5 +129,13 @@ public class Formula {
 
 	public static int getAmount() {
 		return Amount;
+	}
+
+	public Planir getPlframe() {
+		return plframe;
+	}
+
+	public void setPlframe(Planir plframe) {
+		this.plframe = plframe;
 	}
 }
