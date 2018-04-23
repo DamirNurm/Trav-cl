@@ -22,6 +22,7 @@ public class Planir {
 	 * Для создания основного контейнера для приложения используем контейнер JFrame
 	 */
 	private JFrame frame;
+	private String z;
 	/**
 	 * Объявляем поля ввода JTextField. 
 	 * textField - Поле для ввода значения всей площади комнаты. 
@@ -102,6 +103,10 @@ public class Planir {
 		 * Создаем экземпляр класса Formula
 		 */
 		final Formula fl = new Formula(this);
+		
+		DigitFilter.TextFilter(textField, 15);
+		DigitFilter.TextFilter(textField_1, 9);
+		DigitFilter.TextFilter(textField_2, 9);
 		/**
 		 * Создаём простой компонент button_1 класса JButton
 		 */
@@ -118,7 +123,7 @@ public class Planir {
 				/**
 				 * Вызываем метод getFormula
 				 */
-				fl.PFormula(gettextField(), gettextField_1(), gettextField_2());
+				textField_3.setText(fl.PFormula(gettextField(), gettextField_1(), gettextField_2()));
 			}
 		});
 		/**
