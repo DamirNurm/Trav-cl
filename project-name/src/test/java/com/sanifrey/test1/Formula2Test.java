@@ -40,6 +40,7 @@ public void test() {
  * Предполагается, что программа выполнит следующие расчёты: 60-2.5*8.4 и
  * вернёт значение: 39.0.
  */ 
-assertEquals("39.0",formula.PFormula("60", "2.5", "8.4"));
+ formula.PublicAddObject("2.5", "8.4");
+assertEquals("39.0",formula.PFormula("60"));
 }
 }

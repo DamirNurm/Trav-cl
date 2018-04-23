@@ -1,0 +1,53 @@
+=======================
+
+TOTAL AREA: 123.0
+FREE AREA: 3.0
+Objects: 8
+=======================
+
+Object №1
+width:1.0
+length:1.0
+Occupies Area:1.0
+=======================
+
+Object №2
+width:2.0
+length:1.0
+Occupies Area:2.0
+=======================
+
+Object №3
+width:3.0
+length:1.0
+Occupies Area:3.0
+=======================
+
+Object №4
+width:4.0
+length:1.0
+Occupies Area:4.0
+=======================
+
+Object №5
+width:5.0
+length:1.0
+Occupies Area:5.0
+=======================
+
+Object №6
+width:5.0
+length:6.0
+Occupies Area:30.0
+=======================
+
+Object №7
+width:5.0
+length:7.0
+Occupies Area:35.0
+=======================
+
+Object №8
+width:5.0
+length:8.0
+Occupies Area:40.0

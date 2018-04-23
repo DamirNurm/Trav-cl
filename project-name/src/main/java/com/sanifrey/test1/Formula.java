@@ -2,6 +2,9 @@
  * Устанавливаем принадлежность класса к пакету
  */
 package com.sanifrey.test1;
+
+import javax.swing.JOptionPane;
+
 /**
  * Объявляем класс с модификатором public
  */
@@ -11,31 +14,56 @@ public class Formula {
 	 */
 	private Planir plframe;
 	/**
-	 * Объявляем приватные статические переменные.
-	 * FreeArea - значение свободной площади в комнате. 
-	 * AllArea - значение всей площади комнаты.
+	 * Объявляем приватные статические переменные. FreeArea - значение свободной
+	 * площади в комнате. AllArea - значение всей площади комнаты.
 	 */
 	private static float FreeArea;
 	private static float AllArea;
+	private static int Amount = 0;
+	private static Objects[] Obj = new Objects[1024];
+	private int number;
+
 	/**
 	 * Вызываем конструктор
 	 */
 	public Formula(Planir someframe) {
 		this.plframe = someframe;
 	}
+
 	/**
 	 * Приватный метод для расчёта свободной площади в комнате
 	 * @return 
+	 * 
+	 * @return
 	 */
-	private String FormulaFree(float area, float width, float length) {
-		/**
-		 * Присваиваем переменной AllArea значение переменной area
-		 */
-		AllArea = area;
+	private String AddObject(float width, float length) {
+		if(width!=0.0 && length!=0.0) {
+		Amount += 1;
+		Obj[Amount] = new Objects();
+		Obj[Amount].setArea(width * length);
+		Obj[Amount].setWidth(width);
+		Obj[Amount].setLength(length);
+		}else {
+			JOptionPane.showMessageDialog(null, "Заполните поля ненулевыми значениями!");
+		}
+		return String.valueOf(Amount);
+	}
+
+	private String DeleteObjects() {
+		Amount = 0;
+		FreeArea=AllArea;
+		return String.valueOf(Amount);
+	}
+
+	private String FormulaFree(float area) {
 		/**
 		 * Выполняем расчёт свободной площади в комнате
 		 */
-		FreeArea = area - width * length;
+		AllArea=area;
+		FreeArea = AllArea;
+		for (number = 1; number < Amount+1; number++) {
+			FreeArea =FreeArea-Obj[number].getArea();
+		}
 		/**
 		 * Если значение свободной площади(FreeArea) в комнате меньше нуля(что является
 		 * логической ошибкой), то присваиваем значение свободной площади(FreeArea) к
@@ -47,33 +75,56 @@ public class Formula {
 		 * Вызываем метод FillTextField_3 для заполнения в форме планировщик поля
 		 * textField_3 значением FreeArea
 		 */
-		//FillTextField_3(FreeArea);
 		return String.valueOf(FreeArea);
 	}
+
 	/**
 	 * Публичный метод для вызова приватного метода FormulaFree.
-	 * @return 
+	 * 
+	 * @return
 	 */
-	public String PFormula(String area, String width, String length) {
-			FormulaFree(Float.parseFloat(area), Float.parseFloat(width), Float.parseFloat(length));
-			return String.valueOf(FreeArea);
+	public String PFormula(String area) {
+		try {
+		FormulaFree(Float.parseFloat(area));
+		}catch (Exception e){
+			JOptionPane.showMessageDialog(null, "Ошибка во время добавления объекта! \nПоля заполнены неверно!");
+		}
+		return String.valueOf(FreeArea);
+
 	}
-	/**
-	 * Метод для заполнения в форме планировщик поля textField_3 значением FreeArea
-	 */
-	private void FillTextField_3(float FreeArea) {
-		plframe.settextField_3(String.valueOf(FreeArea));
-	}
+
 	/**
 	 * Геттер для получения значения свободной площади в комнате.
 	 */
 	public static float getFreeArea() {
 		return FreeArea;
 	}
+
 	/**
 	 * Геттер для получения значения всей площади в комнате.
 	 */
 	public static float getAllArea() {
 		return AllArea;
+	}
+
+	public String PublicAddObject(String width, String length) {
+		try {
+			AddObject( Float.parseFloat(width), Float.parseFloat(length));
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Ошибка во время добавления объекта! \nПоля заполнены неверно!");
+		}
+		return String.valueOf(Amount);
+
+	}
+
+	public String PublicDeleteObjects() {
+		return DeleteObjects();
+	}
+	public static Objects[] getObj() {
+		return Obj;
+		
+	}
+	public static int getAmount() {
+		return Amount;
 	}
 }

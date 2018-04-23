@@ -50,7 +50,9 @@ public void testFormula1() {
  * Предполагается, что программа выполнит следующие расчёты: 100-5*4 и
  * вернёт значение: 80.0.
  */ 
-assertEquals("80.0",formula.PFormula("100", "5", "4"));
+	formula.PublicAddObject("5", "4");
+	
+assertEquals("80.0",formula.PFormula("100"));
 
 }
 }

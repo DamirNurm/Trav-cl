@@ -2,6 +2,7 @@
  * Устанавливаем принадлежность класса к пакету
  */
 package com.sanifrey.test1;
+
 /**
  * Добавляем библиотеку для исключения несуществующего файла
  */
@@ -27,18 +28,24 @@ public class SaveFile {
 		 * Выполняем отслеживание блока кода, где может произойти ошибка, при помощи
 		 * исключения try
 		 */
+		int i;
+		Objects[] obj = Formula.getObj();
 		try {
 			/**
 			 * Создаем экземпляр указанного класса
 			 */
 			PrintWriter writer = new PrintWriter("Results.txt");
 			/**
-			 * Записываем общую информацию о комнате в файл: 
-			 * -Общая площадь комнаты 
+			 * Записываем общую информацию о комнате в файл: -Общая площадь комнаты
 			 * -Незанятая площадь в комнате
 			 */
 			writer.println("=======================\n" + "\nTOTAL AREA: " + Formula.getAllArea() + "\nFREE AREA: "
-					+ Formula.getFreeArea());
+					+ Formula.getFreeArea() + "\nObjects: "+ Formula.getAmount());
+			for (i = 1; i < Formula.getAmount() + 1; i++) {
+				writer.println("=======================\n" + "\nObject №" + i + "\nwidth:" + obj[i].getWidth()
+						+ "\nlength:" + obj[i].getLength() + "\nOccupies Area:" + obj[i].getArea());
+			}
+
 			/**
 			 * Завершаем работу с файлом и закрываем выходной поток.
 			 */
