@@ -45,5 +45,6 @@ public void test() {
  * вернёт значение: 50.0.
  */ formula.PublicAddObject("5", "8");
 assertEquals("50.0",formula.PFormula("90"));
+formula.PublicDeleteObjects();
 }
 }

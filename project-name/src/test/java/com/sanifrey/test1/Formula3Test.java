@@ -49,5 +49,6 @@ public class Formula3Test {
 		 */
 		formula.PublicAddObject("3", "7");
 		assertEquals("49.0", formula.PFormula("70"));
+		formula.PublicDeleteObjects();
 	}
 }
