@@ -30,9 +30,6 @@ public class Formula {
 	/**
 	 * Приватный метод для расчёта свободной площади в комнате
 	 * 
-	 * @return
-	 * 
-	 * @return
 	 */
 	private String AddObject(float width, float length) {
 		if (width != 0.0 && length != 0.0) {
