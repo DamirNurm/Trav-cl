@@ -8,10 +8,7 @@ package com.sanifrey.test1;
  */
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 /**
  * Подключаем класс событий
@@ -35,6 +32,8 @@ public class Planir {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+
+	private eHandler handler = new eHandler();
 	/**
 	 * Объявляем элементы для отображения текста. label - Отображает "Введите
 	 * площадь всей комнаты". lblNewLabel - Отображает "Параметры объекта". label_1
@@ -46,6 +45,15 @@ public class Planir {
 	private JLabel label_2;
 	private JLabel label_3;
 
+	private JButton button;
+	private JButton button_1;
+	private JButton button_2;
+	private JButton button_3;
+	private ComponentsCreator cc;
+	private PanelCreator pc;
+
+	private Formula fl;
+
 	/**
 	 * Вызываем конструктор.
 	 */
@@ -53,41 +61,31 @@ public class Planir {
 		/**
 		 * Вызываем метод
 		 */
-		initialize(false);
+		initialize();
 	}
 
 	/**
 	 * Инициализируем компоненты фрейма
 	 */
-	private void initialize(boolean arg) {
+	private void initialize() {
 		/**
 		 * Создаем экземпляр класса JFrame
 		 */
 		frame = new JFrame();
-		/**
-		 * Отображаем окно
-		 */
-		frame.setVisible(arg);
-		/**
-		 * Устанавливаем название окна
-		 */
-		frame.setTitle("Планировщик");
-		/**
-		 * Указываем координаты верхней левой вершины окна, а также его ширину и высоту.
-		 */
-		frame.setBounds(100, 100, 480, 313);
-		/**
-		 * Указываем операцию, которая будет произведена при закрытии окна.
-		 */
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		fl = new Formula();
+
+		pc = new PanelCreator();
+		pc.PCreatePanel(frame, false);
+
 		/**
 		 * Создаём простые компоненты класса JLabel
 		 */
-		label = new JLabel("Введите площадь всей комнаты");
-		lblNewLabel = new JLabel("Параметры объекта");
-		label_1 = new JLabel("Ширина");
-		label_2 = new JLabel("Длина");
-		label_3 = new JLabel("Количество объектов:");
+		label = new JLabel();
+		lblNewLabel = new JLabel();
+		label_1 = new JLabel();
+		label_2 = new JLabel();
+		label_3 = new JLabel();
+
 		/**
 		 * Создаём простые компоненты класса JTextField
 		 */
@@ -95,163 +93,77 @@ public class Planir {
 		textField_1 = new JTextField();
 		textField_2 = new JTextField();
 		textField_3 = new JTextField();
-		textField_3.setEditable(false);
 		textField_4 = new JTextField();
-		textField_4.setEditable(false);
 		/**
 		 * Указываем количество символов в строке
 		 */
-		textField.setColumns(10);
-		textField_1.setColumns(10);
-		textField_2.setColumns(10);
-		textField_3.setColumns(10);
-		textField_4.setColumns(10);
+
+		button_1 = new JButton();
+		button_2 = new JButton();
+		button = new JButton();
+		button_3 = new JButton();
+
 		/**
 		 * Создаем экземпляр класса Formula
 		 */
-		final Formula fl = new Formula(this);
+		cc = new ComponentsCreator(frame);
+
+		cc.PJTextFieldSettings(textField, true, 10, 20, 86, 20);
+		cc.PJTextFieldSettings(textField_1, true, 10, 109, 86, 20);
+		cc.PJTextFieldSettings(textField_2, true, 10, 155, 86, 20);
+		cc.PJTextFieldSettings(textField_3, false, 248, 228, 86, 20);
+		cc.PJTextFieldSettings(textField_4, false, 308, 58, 44, 20);
+
+		cc.PJLabelSettings(label, "Введите площадь всей комнаты", 10, 0, 434, 14);
+		cc.PJLabelSettings(lblNewLabel, "Параметры объекта", 10, 61, 123, 14);
+		cc.PJLabelSettings(label_1, "Ширина", 10, 89, 69, 14);
+		cc.PJLabelSettings(label_2, "Длина", 10, 135, 69, 14);
+		cc.PJLabelSettings(label_3, "Количество объектов:", 168, 61, 130, 14);
+
+		cc.PJButtonSettings(button, "Добавить объект", 10, 193, 150, 23);
+		cc.PJButtonSettings(button_1, "Расчёт свободной площади", 10, 227, 230, 23);
+		cc.PJButtonSettings(button_2, "В меню", 361, 240, 93, 23);
+		cc.PJButtonSettings(button_3, "Удалить все объекты", 170, 193, 164, 23);
+
 		/**
 		 * Добавляем фильтр на вводимые символы
 		 */
-		DigitFilter.TextFilter(textField, 15);
-		/**
-		 * Добавляем фильтр на вводимые символы
-		 */
-		DigitFilter.TextFilter(textField_1, 9);
-		/**
-		 * Добавляем фильтр на вводимые символы
-		 */
-		DigitFilter.TextFilter(textField_2, 9);
+
 		/**
 		 * Создаём простой компонент button_1 класса JButton
 		 */
-		textField_4.setText(String.valueOf(Formula.getAmount()));
-		JButton button_1 = new JButton("Расчёт свободной площади");
-		/**
-		 * Добавляем слушателя к кнопке button_1 с помощью вызова addActionListener
-		 */
-		button_1.addActionListener(new ActionListener() {
-			/**
-			 * Интерфейс ActionListener требует только реализации одного метода —
-			 * actionPerformed.
-			 */
-			public void actionPerformed(ActionEvent e) {
-				/**
-				 * Вызываем метод getFormula
-				 */
-				textField_3.setText(fl.PFormula(gettextField()));
+
+		button_1.addActionListener(handler);
+		button.addActionListener(handler);
+		button_2.addActionListener(handler);
+		button_3.addActionListener(handler);
+		
+		FirstLoad();
+	}
+
+	private class eHandler implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+
+			if (e.getSource() == button) {
+				setTextField(textField_4, fl.PublicAddObject(gettextField_1(), gettextField_2()));
 			}
-		});
-		/**
-		 * Создаём простой компонент button_2 класса JButton
-		 */
-		JButton button_2 = new JButton("В меню");
-		/**
-		 * Добавляем слушателя к кнопке button_1 с помощью вызова addActionListener
-		 */
-		button_2.addActionListener(new ActionListener() {
-			/**
-			 * Интерфейс ActionListener требует только реализации одного метода —
-			 * actionPerformed.
-			 */
-			public void actionPerformed(ActionEvent e) {
-				/**
-				 * Скрываем окно "Планировщик"
-				 */
+			if (e.getSource() == button_1) {
+				setTextField(textField_3, fl.PFormula(gettextField()));
+			}
+			if (e.getSource() == button_2) {
 				frame.setVisible(false);
 			}
-		});
-		/**
-		 * Создаём экземпляр класса
-		 */
-
-		JButton button = new JButton("Добавить объект");
-		button.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				textField_4.setText(fl.PublicAddObject(gettextField_1(), gettextField_2()));
+			if (e.getSource() == button_3) {
+				setTextField(textField_4, fl.PublicDeleteObjects());
 			}
 
-		});
-		JButton button_3 = new JButton("Удалить все объекты");
+		}
 
-		button_3.addActionListener(new ActionListener() {
+	}
 
-			public void actionPerformed(ActionEvent e) {
-				textField_1.setText("");
-				textField_2.setText("");
-				textField_4.setText(fl.PublicDeleteObjects());
-			}
-
-		});
-
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addComponent(label_1).addComponent(label_2)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup().addComponent(button_1).addGap(18)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-								.addComponent(button_2))
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 434, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup().addGroup(groupLayout
-								.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(groupLayout.createSequentialGroup().addComponent(lblNewLabel)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(label_3))
-								.addGroup(Alignment.LEADING,
-										groupLayout.createSequentialGroup().addComponent(button)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(button_3)))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap()));
-		groupLayout
-				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup().addComponent(label).addGroup(groupLayout
-								.createParallelGroup(
-										Alignment.TRAILING)
-								.addGroup(
-										groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(textField, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addGap(18)
-												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-														.addComponent(lblNewLabel).addComponent(label_3)
-														.addComponent(textField_4, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(label_1)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(textField_1, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(label_2)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(textField_2, GroupLayout.PREFERRED_SIZE,
-														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addGap(18)
-												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-														.addComponent(button).addComponent(button_3))
-												.addGap(11)
-												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-														.addComponent(button_1)
-														.addComponent(textField_3, GroupLayout.PREFERRED_SIZE,
-																GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addContainerGap(30, Short.MAX_VALUE))
-								.addGroup(
-										groupLayout.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(button_2).addContainerGap()))));
-		/**
-		 * Привязка размещения элементов к панели
-		 */
-		frame.getContentPane().setLayout(groupLayout);
+	private void setTextField(JTextField textFieldPL, String text) {
+		textFieldPL.setText(text);
 	}
 
 	/**
@@ -271,15 +183,9 @@ public class Planir {
 	/**
 	 * Геттер для получения значения из поля textField_2
 	 */
+
 	public String gettextField_2() {
 		return textField_2.getText();
-	}
-
-	/**
-	 * Публичный метод для заполнения поля textField_3
-	 */
-	public void settextField_3(String arg) {
-		textField_3.setText(arg);
 	}
 
 	/**
@@ -287,5 +193,13 @@ public class Planir {
 	 */
 	public void Visiable(boolean arg) {
 		frame.setVisible(arg);
+	}
+
+	public void setFrame(JFrame Pframe) {
+		frame = Pframe;
+	}
+	
+	public void FirstLoad() {
+		setTextField(textField_4, String.valueOf(Formula.getAmount()));
 	}
 }
