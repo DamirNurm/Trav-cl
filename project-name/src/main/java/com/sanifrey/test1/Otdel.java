@@ -69,12 +69,16 @@ public class Otdel {
 		 * Создаём простые компоненты класса JLabel
 		 */
 		JLabel label = new JLabel("Общая площадь");
+		label.setBounds(10, 11, 84, 14);
 		JLabel label_1 = new JLabel("Свободная площадь");
+		label_1.setBounds(10, 57, 105, 14);
 		/**
 		 * Создаём простые компоненты класса JTextField
 		 */
 		textField_1 = new JTextField();
+		textField_1.setBounds(10, 77, 86, 20);
 		textField = new JTextField();
+		textField.setBounds(10, 31, 86, 20);
 		/**
 		 * Указываем количество символов в строке
 		 */
@@ -84,6 +88,7 @@ public class Otdel {
 		 * Создаём простой компонент button класса JButton
 		 */
 		JButton button = new JButton("Сохранить");
+		button.setBounds(10, 180, 87, 23);
 		/**
 		 * Добавляем слушателя к кнопке button с помощью вызова addActionListener
 		 */
@@ -103,6 +108,7 @@ public class Otdel {
 		 * Создаём простой компонент button_1 класса JButton
 		 */
 		JButton button_1 = new JButton("В меню");
+		button_1.setBounds(355, 227, 69, 23);
 		/**
 		 * Добавляем слушателя к кнопке button_1 с помощью вызова addActionListener
 		 */
@@ -118,42 +124,13 @@ public class Otdel {
 				frame.setVisible(false);
 			}
 		});
-		/**
-		 * Создаём экземпляр класса
-		 */
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		/**
-		 * Размещение элементов на панели
-		 */
-		groupLayout.setHorizontalGroup(groupLayout
-				.createParallelGroup(
-						Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(label)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_1)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(button))
-						.addContainerGap(319, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(335, Short.MAX_VALUE)
-						.addComponent(button_1).addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(label)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED).addComponent(label_1)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE).addComponent(button)
-						.addGap(24).addComponent(button_1).addContainerGap()));
-		/**
-		 * Привязка размещения элементов к панели
-		 */
-		frame.getContentPane().setLayout(groupLayout);
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(label);
+		frame.getContentPane().add(textField);
+		frame.getContentPane().add(label_1);
+		frame.getContentPane().add(textField_1);
+		frame.getContentPane().add(button);
+		frame.getContentPane().add(button_1);
 	}
 	/**
 	 * Метод для сохранения в файл
