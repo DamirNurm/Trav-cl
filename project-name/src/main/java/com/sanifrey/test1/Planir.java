@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 
 public class Planir {
 	/**
-	 * Для создания основного контейнера для приложения используем контейнер JFrame
+	 * Объявляем конструктор JFrame
 	 */
 	private JFrame frame;
 	/**
