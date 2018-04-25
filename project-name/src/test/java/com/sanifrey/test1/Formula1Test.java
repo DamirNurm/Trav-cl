@@ -33,7 +33,7 @@ public class Formula1Test {
 		/**
 		 * Инициализируем переменную formula
 		 */
-		formula = new Formula(null);
+		formula = new Formula();
 
 	}
 
