@@ -12,7 +12,7 @@ public class Formula {
 	/**
 	 * Экземпляр класса Planir
 	 */
-	private Planir plframe;
+	
 	/**
 	 * Объявляем приватные статические переменные. FreeArea - значение свободной
 	 * площади в комнате. AllArea - значение всей площади комнаты.
@@ -26,9 +26,6 @@ public class Formula {
 	/**
 	 * Вызываем конструктор
 	 */
-	public Formula(Planir someframe) {
-		this.setPlframe(someframe);
-	}
 
 	/**
 	 * Приватный метод для расчёта свободной площади в комнате
@@ -131,11 +128,4 @@ public class Formula {
 		return Amount;
 	}
 
-	public Planir getPlframe() {
-		return plframe;
-	}
-
-	public void setPlframe(Planir plframe) {
-		this.plframe = plframe;
-	}
 }
