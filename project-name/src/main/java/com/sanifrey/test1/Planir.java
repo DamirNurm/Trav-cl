@@ -70,6 +70,49 @@ public class Planir {
 	private Formula fl;
 
 	/**
+	 * Объявляем массив ButtonName для хранения идентификаторов JButton.
+	 */
+	private JButton ButtonName[]= {button_AddObject,button_CountFreeArea,button_GoToMainMenu,button_DeleteAllObjects};
+	/**
+	 * Объявляем массив Button_keys_label для хранения названия кнопок.
+	 */
+	private String Button_keys_label[] = {"Добавить объект","Расчёт свободной площади","В меню","Удалить все объекты"};
+	/**
+	 * Объявляем массив Button_Bounds для хранения координат расположения кнопки и её размеров.
+	 */
+	private int Button_Bounds[] = {10, 193, 150, 23, 10, 227, 230, 23, 361, 240, 93, 23, 170, 193, 164, 23};
+	
+	/**
+	 * Объявляем массив ButtonName для хранения идентификаторов JTextField.
+	 */
+	private JTextField TextFieldName[]= {textField_AllArea,textField_WidthObj,textField_LengthObj,textField_FreeArea,textField_AmountObj};
+	/**
+	 * Объявляем массив TextField_Bounds для хранения координат расположения поля ввода и её размеров.
+	 */
+	private int TextField_Bounds[] = {10, 20, 86, 20, 10, 109, 86, 20,10, 155, 86, 20,248, 228, 86, 20,308, 58, 44, 20};
+	/**
+	 * Объявляем массив TextField_Editable для хранения информации о возможности редактировать конкретное поле.
+	 */
+	private boolean TextField_Editable[] = {true,true,true,false,false};
+
+	
+	/**
+	 * Объявляем массив ButtonName для хранения идентификаторов JLabel.
+	 */
+	private JLabel JLabelName[] = {label_AllArea, label_ParametersObj, label_WidthObj, label_LengthObj,label_AmountObj};
+	/**
+	 * Объявляем массив JLabel_Bounds для хранения координат расположения label'a и её размеров.
+	 */
+	private int JLabel_Bounds[] = {10, 0, 434, 14, 10, 61, 123, 14,10, 89, 69, 14,10, 135, 69, 14, 168, 61, 130, 14};
+	/**
+	 * Объявляем массив JLabel_text для хранения информации, что будет написано в label'e.
+	 */
+	private String JLabel_text[] = {"Введите площадь всей комнаты","Параметры объекта","Ширина","Длина","Количество объектов:"};
+	/**
+	 * Счётчик используется для подсчёта сдвига в массивах, связанных с координатами и размеров компонента.
+	 */
+	private int Counter;
+	/**
 	 * Вызываем конструктор.
 	 */
 	public Planir() {
@@ -83,6 +126,7 @@ public class Planir {
 	 * Инициализируем компоненты фрейма
 	 */
 	private void initialize() {
+		
 		/**
 		 * Создаем экземпляр класса JFrame
 		 */
@@ -100,85 +144,75 @@ public class Planir {
 		 */
 		pc = new PanelCreator();
 
-		/**
-		 * Создаём простые компоненты класса JLabel
-		 */
-		label_AllArea = new JLabel();
-		label_ParametersObj = new JLabel();
-		label_WidthObj = new JLabel();
-		label_LengthObj = new JLabel();
-		label_AmountObj = new JLabel();
-
+		Counter=0;
 		/**
 		 * Создаём простые компоненты класса JTextField
 		 */
-		textField_AllArea = new JTextField();
-		textField_WidthObj = new JTextField();
-		textField_LengthObj = new JTextField();
-		textField_FreeArea = new JTextField();
-		textField_AmountObj = new JTextField();
+        for (int i=0;i<=4;i++) {
+    		/**
+    		 * Создаем экземпляр класса JTextField
+    		 */
+        	TextFieldName[i] = new JTextField();
+    		/**
+    		 * При помощи метода PJTextFieldSettings задаем параметры для textField-ов.
+    		 * 1-ый параметр - Для какого textField'а задаются следующие параметры.
+    		 * 2-ой параметр - Разрешено ли редактировать.
+    		 * 3-ий параметр - Координата размещения по оси X.
+    		 * 4-ый параметр - Координата размещения по оси Y.
+    		 * 5-ый параметр - Ширина.
+    		 * 6-ой параметр - Длина.
+    		 */
+            cc.PJTextFieldSettings(TextFieldName[i],TextField_Editable[i], TextField_Bounds[Counter+i], TextField_Bounds[Counter+i+1], TextField_Bounds[Counter+i+2], TextField_Bounds[Counter+i+3]);
+    		/**
+    		 * К "k" прибавляем "3" для того, чтобы правильно получать данные из массива TextField_Bounds с информацией о координатах и размеров полей ввода.
+    		 */
+            Counter+=3;
+        }
 		
+  		/**
+		 * Обнуление счётчика для использования в следующем массиве
+		 */
+        Counter=0;
 		/**
 		 * Создаём простые компоненты класса JButton
 		 */
-		button_CountFreeArea = new JButton();
-		button_GoToMainMenu = new JButton();
-		button_AddObject = new JButton();
-		button_DeleteAllObjects = new JButton();
-
-		/**
-		 * При помощи метода PJTextFieldSettings задаем параметры для textField-ов.
-		 * 1-ый параметр - Для какого textField'а задаются следующие параметры.
-		 * 2-ой параметр - Разрешено ли редактировать.
-		 * 3-ий параметр - Координата размещения по оси X.
-		 * 4-ый параметр - Координата размещения по оси Y.
-		 * 5-ый параметр - Ширина.
-		 * 6-ой параметр - Длина.
+        for (int i=0;i<=3;i++) {
+        	ButtonName[i] = new JButton();
+            ButtonName[i].addActionListener(handler);
+    		/**
+    		 * При помощи метода PJButtonSettings задаем параметры для кнопок.
+    		 * 1-ый параметр - Для какого button'а задаются следующие параметры.
+    		 * 2-ой параметр - Что будет написано в этой кнопке.
+    		 * 3-ий параметр - Координата размещения по оси X.
+    		 * 4-ый параметр - Координата размещения по оси Y.
+    		 * 5-ый параметр - Ширина.
+    		 * 6-ой параметр - Длина.
+    		 */
+            cc.PJButtonSettings(ButtonName[i],Button_keys_label[i], Button_Bounds[Counter+i], Button_Bounds[Counter+i+1], Button_Bounds[Counter+i+2], Button_Bounds[Counter+i+3]);
+            Counter+=3;
+        }
+        
+  		/**
+		 * Обнуление счётчика для использования в следующем массиве
 		 */
-
-		cc.PJTextFieldSettings(textField_AllArea, true, 10, 20, 86, 20);
-		cc.PJTextFieldSettings(textField_WidthObj, true, 10, 109, 86, 20);
-		cc.PJTextFieldSettings(textField_LengthObj, true, 10, 155, 86, 20);
-		cc.PJTextFieldSettings(textField_FreeArea, false, 248, 228, 86, 20);
-		cc.PJTextFieldSettings(textField_AmountObj, false, 308, 58, 44, 20);
-
+        Counter=0;
 		/**
-		 * При помощи метода PJLabelSettings задаем параметры для label-ов.
-		 * 1-ый параметр - Для какого label'а задаются следующие параметры.
-		 * 2-ой параметр - Что будет показано этим label'ом.
-		 * 3-ий параметр - Координата размещения по оси X.
-		 * 4-ый параметр - Координата размещения по оси Y.
-		 * 5-ый параметр - Ширина.
-		 * 6-ой параметр - Длина.
+		 * Создаём простые компоненты класса JLabel
 		 */
-		cc.PJLabelSettings(label_AllArea, "Введите площадь всей комнаты", 10, 0, 434, 14);
-		cc.PJLabelSettings(label_ParametersObj, "Параметры объекта", 10, 61, 123, 14);
-		cc.PJLabelSettings(label_WidthObj, "Ширина", 10, 89, 69, 14);
-		cc.PJLabelSettings(label_LengthObj, "Длина", 10, 135, 69, 14);
-		cc.PJLabelSettings(label_AmountObj, "Количество объектов:", 168, 61, 130, 14);
-
-		/**
-		 * При помощи метода PJButtonSettings задаем параметры для кнопок.
-		 * 1-ый параметр - Для какого button'а задаются следующие параметры.
-		 * 2-ой параметр - Что будет написано в этой кнопке.
-		 * 3-ий параметр - Координата размещения по оси X.
-		 * 4-ый параметр - Координата размещения по оси Y.
-		 * 5-ый параметр - Ширина.
-		 * 6-ой параметр - Длина.
-		 */
-		cc.PJButtonSettings(button_AddObject, "Добавить объект", 10, 193, 150, 23);
-		cc.PJButtonSettings(button_CountFreeArea, "Расчёт свободной площади", 10, 227, 230, 23);
-		cc.PJButtonSettings(button_GoToMainMenu, "В меню", 361, 240, 93, 23);
-		cc.PJButtonSettings(button_DeleteAllObjects, "Удалить все объекты", 170, 193, 164, 23);
-
-		/**
-		 * Добавляем слушателей для кнопок
-		 */
-		button_CountFreeArea.addActionListener(handler);
-		button_AddObject.addActionListener(handler);
-		button_GoToMainMenu.addActionListener(handler);
-		button_DeleteAllObjects.addActionListener(handler);
-		
+        for (int i=0;i<=4;i++) {
+        	JLabelName[i] = new JLabel();
+    		/**
+    		 * При помощи метода PJLabelSettings задаем параметры для label-ов.
+    		 * 1-ый параметр - Для какого label'а задаются следующие параметры.
+    		 * 2-ой параметр - Что будет показано этим label'ом.
+    		 * 3-ий параметр - Координата размещения по оси X.
+    		 * 4-ый параметр - Координата размещения по оси Y.
+    		 * 5-ый параметр - Ширина.
+    		 * 6-ой параметр - Длина.
+    		 */
+            cc.PJLabelSettings(JLabelName[i],JLabel_text[i], JLabel_Bounds[Counter+i], JLabel_Bounds[Counter+i+1], JLabel_Bounds[Counter+i+2], JLabel_Bounds[Counter+i+3]);
+            Counter+=3;
+        }
 		/**
 		 * При помощи метода PCreatePanel задаем необходимые параметры для frame
 		 */
@@ -187,6 +221,7 @@ public class Planir {
 		 * При выполнении первой загрузки вызываем метод FirstLoad для того, чтобы заполнилось поле с информацией о значении количества объектов
 		 */
 		FirstLoad();
+	
 	}
 	
 	/**
@@ -202,31 +237,31 @@ public class Planir {
 		 * ActionEvent - событие
 		 */
 		public void actionPerformed(ActionEvent e) {
-
 			/**
 			 * Проверка нажатия на кнопку button_AddObject
 			 */
-			if (e.getSource() == button_AddObject) {
+			if (e.getSource() == ButtonName[0]) {
 				/**
 				 * При помощи метода setTextField заполняем поле textField_AmountObj
 				 */
-				setTextField(textField_AmountObj, fl.PublicAddObject(gettextField_WidthObj(), gettextField_LengthObj()));
+				setTextField(4, fl.PublicAddObject(getTextFieldName(1), getTextFieldName(2)));
 			}
 			
 			/**
 			 * Проверка нажатия на кнопку button_CountFreeArea
 			 */
-			if (e.getSource() == button_CountFreeArea) {
+			if (e.getSource() == ButtonName[1]) {
+				
 				/**
 				 * При помощи метода setTextField заполняем поле textField_FreeArea
 				 */
-				setTextField(textField_FreeArea, fl.PFormula(gettextField_AllArea()));
+				setTextField(3,fl.PFormula(getTextFieldName(0)));
 			}
 			
 			/**
 			 * Проверка нажатия на кнопку button_GoToMainMenu
 			 */
-			if (e.getSource() == button_GoToMainMenu) {
+			if (e.getSource() == ButtonName[2]) {
 				/**
 				 * Скрываем окно "Планировщик"
 				 */
@@ -236,11 +271,11 @@ public class Planir {
 			/**
 			 * Проверка нажатия на кнопку DeleteAllObjects
 			 */
-			if (e.getSource() == button_DeleteAllObjects) {
+			if (e.getSource() == ButtonName[3]) {
 				/**
 				 * При помощи метода setTextField заполняем поле textField_AmountObj
 				 */
-				setTextField(textField_AmountObj, fl.PublicDeleteObjects());
+				setTextField(4, fl.PublicDeleteObjects());
 			}
 
 		}
@@ -250,37 +285,30 @@ public class Planir {
 	/**
 	 * Приваный метод для заполнения полей(JTextField) значением типа String
 	 */
-	private void setTextField(JTextField textFieldPL, String text) {
-		textFieldPL.setText(text);
+	private void setTextField(int i, String text) {
+		/**
+		 * Записываем в TextFieldName[i] значение text
+		 */
+		TextFieldName[i].setText(text);
 	}
 	
 	/**
 	 * Приваный, который заполняет поле textField_AmountObj значением кол-ва созданных объектов.
 	 */
 	private void FirstLoad() {
-		setTextField(textField_AmountObj, String.valueOf(Formula.getAmount()));
+		setTextField(0, String.valueOf(Formula.getAmount()));
 	}
 
 	/**
 	 * Геттер для получения значения из поля textField_AllArea
 	 */
-	public String gettextField_AllArea() {
-		return textField_AllArea.getText();
+	public String getTextFieldName(int i) {
+		/**
+		 * Получаем значение из поля ввода TextFieldName[i]
+		 */
+		return TextFieldName[i].getText();
 	}
 
-	/**
-	 * Геттер для получения значения из поля textField_WidthObj
-	 */
-	public String gettextField_WidthObj() {
-		return textField_WidthObj.getText();
-	}
-
-	/**
-	 * Геттер для получения значения из поля textField_LengthObj
-	 */
-	public String gettextField_LengthObj() {
-		return textField_LengthObj.getText();
-	}
 
 	/**
 	 * Публичный метод для указания значения для setVisiable в окне "Планировщик"
