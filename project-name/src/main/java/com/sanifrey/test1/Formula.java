@@ -82,7 +82,7 @@ public class Formula {
 		try {
 			FormulaFree(Float.parseFloat(area));
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Ошибка во время добавления объекта! \nПоля заполнены неверно!");
+			JOptionPane.showMessageDialog(null, "Ошибка в расчёте свободной площади! \nПоля заполнены неверно!");
 		}
 		return String.valueOf(FreeArea);
 
