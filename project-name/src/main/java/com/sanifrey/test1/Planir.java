@@ -52,7 +52,8 @@ public class Planir {
 	private JLabel label_LengthObj;
 	private JLabel label_AmountObj;
 	/**
-	 * Объявляем элементы для отображения текста. button_AddObject - Кнопка для добавления объекта.
+	 * Объявляем кнопки.
+	 * button_AddObject - Кнопка для добавления объекта.
 	 * button_CountFreeArea - Кнопка для вызова метода по подсчёту свободной площади в комнате.
 	 * button_GoToMainMenu - Кнопка для возвращения в главное меню.
 	 * button_DeleteAllObjects - Кнопка для удаления всех объектов из расчётов.
@@ -178,7 +179,6 @@ public class Planir {
 		 */
         for (int i=0;i<=3;i++) {
         	ButtonName[i] = new JButton();
-            ButtonName[i].addActionListener(handler);
     		/**
     		 * При помощи метода PJButtonSettings задаем параметры для кнопок.
     		 * 1-ый параметр - Для какого button'а задаются следующие параметры.
@@ -189,6 +189,7 @@ public class Planir {
     		 * 6-ой параметр - Длина.
     		 */
             cc.PJButtonSettings(ButtonName[i],Button_keys_label[i], Button_Bounds[Counter+i], Button_Bounds[Counter+i+1], Button_Bounds[Counter+i+2], Button_Bounds[Counter+i+3]);
+            ButtonName[i].addActionListener(handler);
             Counter+=3;
         }
         
@@ -216,12 +217,12 @@ public class Planir {
 		/**
 		 * При помощи метода PCreatePanel задаем необходимые параметры для frame
 		 */
-		pc.PCreatePanel(frame, false);
+		pc.PCreatePanel(frame, false, "Планировщик");
 		/**
 		 * При выполнении первой загрузки вызываем метод FirstLoad для того, чтобы заполнилось поле с информацией о значении количества объектов
 		 */
 		FirstLoad();
-	
+		
 	}
 	
 	/**
@@ -240,44 +241,39 @@ public class Planir {
 			/**
 			 * Проверка нажатия на кнопку button_AddObject
 			 */
-			if (e.getSource() == ButtonName[0]) {
+				if (e.getSource() == getButtonName(0)) {
+					/**
+					 * При помощи метода setTextField заполняем поле textField_AmountObj
+					 */
+					setTextField(4, fl.PublicAddObject(getTextFieldName(1), getTextFieldName(2)));
+				}
 				/**
-				 * При помощи метода setTextField заполняем поле textField_AmountObj
+				 * Проверка нажатия на кнопку button_CountFreeArea
 				 */
-				setTextField(4, fl.PublicAddObject(getTextFieldName(1), getTextFieldName(2)));
-			}
-			
-			/**
-			 * Проверка нажатия на кнопку button_CountFreeArea
-			 */
-			if (e.getSource() == ButtonName[1]) {
-				
+				else if(e.getSource() == getButtonName(1)){
+					/**
+					 * При помощи метода setTextField заполняем поле textField_FreeArea
+					 */
+					setTextField(3,fl.PFormula(getTextFieldName(0)));
+				}
 				/**
-				 * При помощи метода setTextField заполняем поле textField_FreeArea
+				 * Проверка нажатия на кнопку button_GoToMainMenu
 				 */
-				setTextField(3,fl.PFormula(getTextFieldName(0)));
-			}
-			
-			/**
-			 * Проверка нажатия на кнопку button_GoToMainMenu
-			 */
-			if (e.getSource() == ButtonName[2]) {
+				else if(e.getSource() == getButtonName(2)){
+					/**
+					 * Скрываем окно "Планировщик"
+					 */
+					frame.setVisible(false);
+				}
 				/**
-				 * Скрываем окно "Планировщик"
+				 * Проверка нажатия на кнопку DeleteAllObjects
 				 */
-				frame.setVisible(false);
-			}
-			
-			/**
-			 * Проверка нажатия на кнопку DeleteAllObjects
-			 */
-			if (e.getSource() == ButtonName[3]) {
-				/**
-				 * При помощи метода setTextField заполняем поле textField_AmountObj
-				 */
-				setTextField(4, fl.PublicDeleteObjects());
-			}
-
+				else if(e.getSource() == getButtonName(3)){
+					/**
+					 * При помощи метода setTextField заполняем поле textField_AmountObj
+					 */
+					setTextField(4, fl.PublicDeleteObjects());
+				}
 		}
 
 	}
@@ -285,7 +281,7 @@ public class Planir {
 	/**
 	 * Приваный метод для заполнения полей(JTextField) значением типа String
 	 */
-	private void setTextField(int i, String text) {
+	public void setTextField(int i, String text) {
 		/**
 		 * Записываем в TextFieldName[i] значение text
 		 */
@@ -308,13 +304,25 @@ public class Planir {
 		 */
 		return TextFieldName[i].getText();
 	}
-
-
 	/**
 	 * Публичный метод для указания значения для setVisiable в окне "Планировщик"
 	 */
 	public void Visiable(boolean arg) {
 		frame.setVisible(arg);
 	}
-
+	
+	public JButton getButtonName(int i) {
+		/**
+		 * Получаем значение из поля ввода TextFieldName[i]
+		 */
+		return ButtonName[i];
+	}
+	
+	public JFrame getframe() {
+		/**
+		 * Получаем значение из поля ввода TextFieldName[i]
+		 */
+		return frame;
+	}
+	
 }

@@ -15,12 +15,8 @@ import java.awt.event.ActionListener;
  * Подключаем библиотеку для работы с графическим интерфейсом
  */
 import javax.swing.JFrame;
-import javax.swing.JButton;
-/**
- * Подключаем библиотеку для работы с менеджером компоновки
- */
-import java.awt.BorderLayout;
 
+import javax.swing.JButton;
 /**
  * Объявляем класс с модификатором public
  */
@@ -77,84 +73,127 @@ public class MainMenu {
 		 */
 		initialize();
 	}
-
+	/**
+	 * Создаем экземпляр класса eHandler и возвращает ссылку на вновь созданный объект
+	 */
+	private eHandler handler = new eHandler();
+	/**
+	 * Объявляем кнопки.
+	 * button_Planirov - Кнопка для открытия окна "Планировщик".
+	 * button_Otdelochnik - Кнопка для открытия окна "Отделочник".
+	 */
+	private JButton button_Planirov;
+	private JButton button_Otdelochnik;
+	
+	/**
+	 * Объявляем приватные переменные
+	 */
+	private ComponentsCreator cc;
+	/**
+	 * Счётчик используется для подсчёта сдвига в массивах, связанных с координатами и размеров компонента.
+	 */
+	private int Counter;
+	/**
+	 * Объявляем массив ButtonName для хранения идентификаторов JButton.
+	 */
+	private JButton ButtonName[]= {button_Planirov,button_Otdelochnik};
+	/**
+	 * Объявляем массив Button_keys_label для хранения названия кнопок.
+	 */
+	private String Button_keys_label[] = {"Планировщик","Отделочник"};
+	/**
+	 * Объявляем массив Button_Bounds для хранения координат расположения кнопки и её размеров.
+	 */
+	private int Button_Bounds[] = {11, 0, 150, 271,300, 0, 150, 270};
 	/**
 	 * Инициализируем компоненты фрейма
 	 */
 	private void initialize() {
 		/**
-		 * Создаем экземпляр класса Otdel
-		 */
-		final Otdel ot = new Otdel();
-		/**
-		 * Создаем экземпляр класса Planir
-		 */
-		final Planir mp = new Planir();
-		/**
 		 * Создаём объект
 		 */
 		frame = new JFrame();
 		/**
-		 * Устанавливаем название окна
+		 * Создаем экземпляр класса PanelCreator
 		 */
-		frame.setTitle("Главное меню");
+		PanelCreator pc = new PanelCreator();
 		/**
-		 * Указываем координаты верхней левой вершины окна, а также его ширину и высоту.
+		 * Вызываем метод для задания параметров окна
 		 */
-		frame.setBounds(100, 100, 450, 300);
+		pc.PCreatePanel(frame, true, "Главное меню");
 		/**
-		 * Указываем операцию, которая будет произведена при закрытии окна.
+		 * Создаем экземпляр класса ComponentsCreator
 		 */
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cc = new ComponentsCreator(frame);
 		/**
-		 * Создаём простой компонент btnNewButton класса JButton
+		 * Обнуляем счётчик
 		 */
-		JButton btnNewButton = new JButton("Планировщик");
-		/**
-		 * Добавляем компонент btnNewButton на панель
-		 */
-		frame.getContentPane().add(btnNewButton, BorderLayout.WEST);
-		/**
-		 * Создаём простой компонент btnNewButton_1 класса JButton
-		 */
-		JButton btnNewButton_1 = new JButton("Отделочник");
-		/**
-		 * Добавляем компонент btnNewButton_1 на панель
-		 */
-		frame.getContentPane().add(btnNewButton_1, BorderLayout.EAST);
-		/**
-		 * Добавляем слушателя к кнопке btnNewButton_1 с помощью вызова
-		 * addActionListener
-		 */
-		btnNewButton_1.addActionListener(new ActionListener() {
+		Counter = 0;
+		for(int i=0;i<ButtonName.length;i++) {
 			/**
-			 * Интерфейс ActionListener требует только реализации одного метода —
-			 * actionPerformed.
+			 * Создаем экземпляр класса
 			 */
-			public void actionPerformed(ActionEvent e) {
-				/**
-				 * Делаем видимым окно "Отделочник"
-				 */
-				ot.Visiable(true);
-			}
-		});
-		/**
-		 * Добавляем слушателя к кнопке btnNewButton с помощью вызова addActionListener
-		 */
-		btnNewButton.addActionListener(new ActionListener() {
+        	ButtonName[i] = new JButton();
+    		/**
+    		 * При помощи метода PJButtonSettings задаем параметры для кнопок.
+    		 * 1-ый параметр - Для какого button'а задаются следующие параметры.
+    		 * 2-ой параметр - Что будет написано в этой кнопке.
+    		 * 3-ий параметр - Координата размещения по оси X.
+    		 * 4-ый параметр - Координата размещения по оси Y.
+    		 * 5-ый параметр - Ширина.
+    		 * 6-ой параметр - Длина.
+    		 */
+            cc.PJButtonSettings(ButtonName[i],Button_keys_label[i], Button_Bounds[Counter+i], Button_Bounds[Counter+i+1], Button_Bounds[Counter+i+2], Button_Bounds[Counter+i+3]);
 			/**
-			 * Интерфейс ActionListener требует только реализации одного метода —
-			 * actionPerformed.
+			 * Подключаем слушателя
 			 */
-			public void actionPerformed(ActionEvent e) {
+            ButtonName[i].addActionListener(handler);
+       		/**
+    		 * К "k" прибавляем "3" для того, чтобы правильно получать данные из массива Button_Bounds с информацией о координатах и размеров полей ввода.
+    		 */
+            Counter+=3;
+		}
+		
+	}
+	/**
+	 * Создаём новый класс и реализуем интерфейс.
+	 * implements это ключевое слово, предназначенное для реализации интерфейса (interface).
+	 */
+	private class eHandler implements ActionListener {
+		/**
+		 * Создаем экземпляр класса Otdel
+		 */
+		Otdel ot = new Otdel();
+		/**
+		 * Создаем экземпляр класса Planir
+		 */
+		Planir mp = new Planir();
+		/**
+		 * Интерфейс ActionListener требует только реализации одного метода —
+		 * actionPerformed.
+		 * 
+		 * ActionEvent - событие
+		 */
+		public void actionPerformed(ActionEvent e) {
+			/**
+			 * Проверка нажатия на кнопку button_AddObject
+			 */
+				if (e.getSource() == ButtonName[0]) {
+					/**
+					 * Делаем видимым окно "Планировщик"
+					 */
+					mp.Visiable(true);
+				}
 				/**
-				 * Делаем видимым окно "Планировщик"
+				 * Проверка нажатия на кнопку button_CountFreeArea
 				 */
-				mp.Visiable(true);
-			}
-		});
-		
-		
-		//Handler
+				else if(e.getSource() == ButtonName[1]){
+					/**
+					 * Делаем видимым окно "Отделочник"
+					 */
+					ot.Visiable(true);
+				}
+		}
+
 	}
 }
