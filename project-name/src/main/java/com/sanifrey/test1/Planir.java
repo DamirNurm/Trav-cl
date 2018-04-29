@@ -165,7 +165,7 @@ public class Planir {
     		 */
             cc.PJTextFieldSettings(TextFieldName[i],TextField_Editable[i], TextField_Bounds[Counter+i], TextField_Bounds[Counter+i+1], TextField_Bounds[Counter+i+2], TextField_Bounds[Counter+i+3]);
     		/**
-    		 * К "k" прибавляем "3" для того, чтобы правильно получать данные из массива TextField_Bounds с информацией о координатах и размеров полей ввода.
+    		 * К "Counter" прибавляем "3" для того, чтобы правильно получать данные из массива TextField_Bounds с информацией о координатах и размеров полей ввода.
     		 */
             Counter+=3;
         }
