@@ -39,8 +39,8 @@ public class SaveFile {
 			 * Записываем общую информацию о комнате в файл: -Общая площадь комнаты
 			 * -Незанятая площадь в комнате
 			 */
-			writer.println("=======================\n" + "\nTOTAL AREA: " + Formula.getAllArea() + "\nFREE AREA: "
-					+ Formula.getFreeArea() + "\nObjects: "+ Formula.getAmount());
+			writer.println("=======================\n" + "\nTOTAL AREA: " + Formula.getAllArea() + ";\nFREE AREA: "
+					+ Formula.getFreeArea() + ";\nObjects: "+ Formula.getAmount());
 			for (i = 1; i < Formula.getAmount() + 1; i++) {
 				writer.println("=======================\n" + "\nObject №" + i + ";\nwidth:" + obj[i].getWidth()
 						+ ";\nlength:" + obj[i].getLength() + ";\nOccupies Area:" + obj[i].getArea());
