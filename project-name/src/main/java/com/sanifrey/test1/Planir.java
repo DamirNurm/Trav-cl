@@ -292,7 +292,7 @@ public class Planir {
 	 * Приваный, который заполняет поле textField_AmountObj значением кол-ва созданных объектов.
 	 */
 	private void FirstLoad() {
-		setTextField(0, String.valueOf(Formula.getAmount()));
+		setTextField(4, String.valueOf(Formula.getAmount()));
 	}
 
 	/**
