@@ -31,7 +31,7 @@ public class Formula1Test {
 	@Before
 	public void setup() {
 		/**
-		 * Инициализируем переменную formula
+		 * Инициализируем переменную formula 
 		 */
 		formula = new Formula();
 
