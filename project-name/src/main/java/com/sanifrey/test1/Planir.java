@@ -153,7 +153,7 @@ public class Planir {
 		/**
 		 * Создаём простые компоненты класса JTextField
 		 */
-		for (int i = 0; i <= 4; i++) {
+		for (int i = 0; i <TextFieldName.length; i++) {
 			/**
 			 * Создаем экземпляр класса JTextField
 			 */
@@ -181,7 +181,7 @@ public class Planir {
 		/**
 		 * Создаём простые компоненты класса JButton
 		 */
-		for (int i = 0; i <= 3; i++) {
+		for (int i = 0; i<ButtonName.length; i++) {
 			ButtonName[i] = new JButton();
 			/**
 			 * При помощи метода PJButtonSettings задаем параметры для кнопок. 1-ый параметр
@@ -202,7 +202,7 @@ public class Planir {
 		/**
 		 * Создаём простые компоненты класса JLabel
 		 */
-		for (int i = 0; i <= 4; i++) {
+		for (int i = 0; i <JLabelName.length; i++) {
 			JLabelName[i] = new JLabel();
 			/**
 			 * При помощи метода PJLabelSettings задаем параметры для label-ов. 1-ый
@@ -284,7 +284,7 @@ public class Planir {
 		/**
 		 * Записываем в TextFieldName[i] значение text
 		 */
-		TextFieldName[i].setText(text);
+		this.TextFieldName[i].setText(text);
 	}
 
 	/**
@@ -314,14 +314,14 @@ public class Planir {
 
 	public JButton getButtonName(int i) {
 		/**
-		 * Получаем значение из поля ввода TextFieldName[i]
+		 * Получаем кнопку ButtonName[i]
 		 */
 		return ButtonName[i];
 	}
 
 	public JFrame getframe() {
 		/**
-		 * Получаем значение из поля ввода TextFieldName[i]
+		 * Получаем frame
 		 */
 		return frame;
 	}

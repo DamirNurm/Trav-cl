@@ -43,6 +43,10 @@ public class Otdel {
 	 */
 	private JLabel label_AllArea;
 	private JLabel label_FreeArea;
+	/**
+	 * Инициализируем экземпляры классов
+	 */
+	private SaveFile sf;
 	private ComponentsCreator cc;
 	private PanelCreator pc;
 	/**
@@ -189,6 +193,10 @@ public class Otdel {
 			Counter += 3;
 		}
 		/**
+		 * Обнуление счётчика
+		 */
+		Counter = 0;
+		/**
 		 * При помощи метода PCreatePanel задаем необходимые параметры для frame
 		 */
 		pc.PCreatePanel(frame, false, "Отделочник");
@@ -243,7 +251,7 @@ public class Otdel {
 		/**
 		 * Создаем экземпляр класса SaveFile
 		 */
-		SaveFile sf = new SaveFile();
+		sf = new SaveFile();
 		/**
 		 * Вызываем метод PSaveInFile
 		 */
@@ -252,7 +260,7 @@ public class Otdel {
 
 	public JButton getButtonName(int i) {
 		/**
-		 * Получаем значение из поля ввода TextFieldName[i]
+		 * Получаем значение из поля ввода ButtonName[i]
 		 */
 		return ButtonName[i];
 	}
@@ -261,7 +269,7 @@ public class Otdel {
 		/**
 		 * Записываем в TextFieldName[i] значение text
 		 */
-		TextFieldName[i].setText(text);
+		this.TextFieldName[i].setText(text);
 	}
 
 	/**
@@ -274,7 +282,4 @@ public class Otdel {
 		 */
 		UpdateTextFields();
 	}
-	/**
-	 * Публичный метод для инициализации окна "Планировщик"
-	 */
 }

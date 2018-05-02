@@ -176,7 +176,7 @@ public class MainMenu {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			/**
-			 * Проверка нажатия на кнопку button_AddObject
+			 * Проверка нажатия на кнопку ButtonName[0](button_AddObject)
 			 */
 				if (e.getSource() == ButtonName[0]) {
 					/**
@@ -185,7 +185,7 @@ public class MainMenu {
 					mp.Visiable(true);
 				}
 				/**
-				 * Проверка нажатия на кнопку button_CountFreeArea
+				 * Проверка нажатия на кнопку ButtonName[1](button_CountFreeArea)
 				 */
 				else if(e.getSource() == ButtonName[1]){
 					/**

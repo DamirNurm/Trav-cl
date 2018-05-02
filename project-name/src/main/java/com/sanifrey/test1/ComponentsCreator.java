@@ -63,7 +63,7 @@ public class ComponentsCreator {
 			/**
 			 * Для поля ввода textField передаем значение максимальной длины: 9.
 			 */
-			DigitFilter.TextFilter(textField, 9);
+			DigitFilter.PTextFilter(textField, 9);
 	}
 	
 	/**

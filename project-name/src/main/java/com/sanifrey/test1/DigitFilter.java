@@ -32,7 +32,7 @@ public class DigitFilter {
 	 * два параметра TextField и length(длина строки)
 	 * для ограничения вводимых символов в поле ввода.
 	 */
-	public static void TextFilter(JTextField TextField, final int length) {
+	private static void TextFilter(JTextField TextField, final int length) {
 		/**
 		 * Вставляем фильтр вводимых символов
 		 */
@@ -60,6 +60,9 @@ public class DigitFilter {
 				}
 			}
 		});
+	}
+	public static void PTextFilter(JTextField TextField, final int length) {
+		TextFilter(TextField,length);
 	}
 	
 }

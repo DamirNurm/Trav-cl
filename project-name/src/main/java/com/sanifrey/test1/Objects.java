@@ -21,13 +21,13 @@ public class Objects {
 		return width;
 	}
 	/**
-	 * Сеттер для указания значения занимаемой объектом площади.
+	 * Сеттер для указания значения ширины объекта.
 	 */
 	public void setWidth(float width) {
 		this.width = width;
 	}
 	/**
-	 * Геттер для получения значения длины объекта
+	 * Геттер для получения значения длины объекта.
 	 */
 	public float getLength() {
 		return length;
