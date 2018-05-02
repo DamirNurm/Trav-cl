@@ -13,7 +13,7 @@ public class Formula {
 	 * Объявляем приватные статические переменные. FreeArea - значение свободной
 	 * площади в комнате. AllArea - значение всей площади комнаты.
 	 * Amount - Количество объектов. Obj - экземляр класса. 
-	 * number - 
+	 * number - переменная, которая обозначает номер объекта в расчёте свободной площади
 	 */
 	private static float FreeArea;
 	private static float AllArea;
