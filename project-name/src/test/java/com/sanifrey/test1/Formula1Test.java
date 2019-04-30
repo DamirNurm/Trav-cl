@@ -26,7 +26,7 @@ public class Formula1Test {
 
 	public void testFormula1() {
 	
-		assertEquals(formula.getAmount,"0");
+		assertEquals(formula.getAmount," 0");
 
 	}
 }
