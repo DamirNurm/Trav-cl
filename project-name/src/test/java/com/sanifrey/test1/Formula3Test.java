@@ -23,7 +23,7 @@ public class Formula3Test {
 	/**
 	 * Объявляем переменную типа Formula
 	 */
-	private Formula formula;
+	private SaveFile sf;
 
 	/**
 	 * Обозначаем , что следующий метод должен  быть выполнен перед тестированием
@@ -33,7 +33,7 @@ public class Formula3Test {
 		/**
 		 * Инициализируем переменную formula
 		 */
-		formula = new Formula();
+		sf = new SaveFile();
 
 	}
 
@@ -51,21 +51,12 @@ public class Formula3Test {
 		 * вызове метода; Предполагается, что программа выполнит следующие расчёты:
 		 * 70-3*7 и вернёт значение: 49.0.
 		 */
-	public void testFormula1() {
+	public void testsave() {
 		/**
-		 * Добавляем объект для расчётов при помощи метода PublicAddObject со значением ширины "3" и значением длины "7".
+		 * Проверяем сохранение в файл
 		 */
-		formula.PublicAddObject("3", "7");
-		/**
-		 * Выполняем расчёт свободной площади с выше добавленным объектом при значении всей площади "70".
-		 * Метод assertEquals сравнивает значения, если значения будут разные, то будет ошибка.Предполагается,что
-		 * вернёт значение: 49.0
-		 */
-		assertEquals("49.0", formula.PFormula("70"));
-		/**
-		 * Выполняем удаление всех объектов.
-		 */
-		formula.PublicDeleteObjects();
+		sf.PSaveInFile();
+
 
 	}
 }
