@@ -31,8 +31,9 @@ public class Formula3Test {
 	@Before
 	public void setup() {
 		/**
-		 * Инициализируем переменную formula
+		 * Инициализируем переменные
 		 */
+		formula = new Formula();
 		sf = new SaveFile();
 
 	}
@@ -55,6 +56,11 @@ public class Formula3Test {
 		/**
 		 * Проверяем сохранение в файл
 		 */
+		/**
+		 * Добавляем объект для расчётов при помощи метода PublicAddObject со значением ширины "2.5" и значением длины "8.4".
+		 */
+		formula.PublicAddObject("2.5", "8.4");
+		formula.PFormula("60");
 		sf.PSaveInFile();
 
 

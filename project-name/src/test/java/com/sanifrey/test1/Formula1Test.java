@@ -62,10 +62,6 @@ public class Formula2Test {
 		 * вернёт значение: 39.0
 		 */
 		assertEquals("39.0",formula.PFormula("60"));
-		/**
-		 * Выполняем удаление всех объектов.
-		 */
 		formula.PublicDeleteObjects();
-
 	}
 }
